@@ -1,6 +1,7 @@
 import React from 'react';
+import {checkGuess} from '../../game-helpers'
 
-function GuessInput({ handlePreviousGuesses}) {
+function GuessInput({ handlePreviousGuesses,handleGuessesChecked}) {
   const [tentativeGuess, setTentativeGuess] = React.useState('');
   return (
     <form

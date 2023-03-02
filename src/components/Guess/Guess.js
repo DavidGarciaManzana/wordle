@@ -1,23 +1,26 @@
 import React from 'react';
-import { NUM_OF_GUESSES_ALLOWED } from '../../constants';
 import { range } from '../../utils';
+import { checkGuess } from '../../game-helpers';
 
-function Guess({ guesses }) {
+function Guess({ value, answer }) {
+  //value -> {}
+  //checkedValue -> [{},{}]
+  let checkedValue;
+    if(value){
+      checkedValue = checkGuess(value.answer, answer);
+    }
 
   return (
-    <div className="guess-results">
-      {range(6).map((row, index) => (
-        <p className="guess" key={index}>
-          {
-            range(5).map((cell, index) => (
-              <span className="cell" key={index}>
-                {(guesses[row]&&row<NUM_OF_GUESSES_ALLOWED) && guesses[row].answer[cell]}
-              </span>
-            ))
-          }
-        </p>
+    <p className='guess'>
+      {range(5).map((cell) => (
+        <span
+          className={checkedValue ? `cell ${checkedValue[cell].status}`:'cell'}
+          key={value ? `${value.id}-${cell}` : cell}
+        >
+          {value ? value.answer[cell] : undefined}
+        </span>
       ))}
-    </div>
+    </p>
   );
 }
 
