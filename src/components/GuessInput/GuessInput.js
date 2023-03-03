@@ -1,7 +1,7 @@
 import React from 'react';
-import {checkGuess} from '../../game-helpers'
+import {checkGuess} from '../../game-helpers' //TODO remove unusable code
 
-function GuessInput({ handlePreviousGuesses,handleGuessesChecked}) {
+function GuessInput({ handlePreviousGuesses,gameOver}) {
   const [tentativeGuess, setTentativeGuess] = React.useState('');
   return (
     <form
@@ -19,6 +19,7 @@ function GuessInput({ handlePreviousGuesses,handleGuessesChecked}) {
         value={tentativeGuess}
         onChange={(event) => setTentativeGuess(event.target.value.toUpperCase())}
         pattern="[A-Z]{5}" title="Must contain five characters"
+        disabled={gameOver !== 'running'}
 
       />
     </form>
